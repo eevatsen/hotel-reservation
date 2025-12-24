@@ -1,0 +1,45 @@
+﻿@using Domain.Entities
+@model IEnumerable<Hotel>
+
+@{
+    ViewData["Title"] = "Головна";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-4">Ласкаво просимо до Hotel Booking</h1>
+    <p>Знайдіть найкращий номер для свого відпочинку.</p>
+</div>
+
+<div class="row">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">
+            Готелів поки немає в базі даних. Спробуйте перезапустити програму.
+        </div>
+    }
+    else
+    {
+        @foreach (var hotel in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://placehold.co/600x400?text=@hotel.Name" class="card-img-top" alt="@hotel.Name">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">@hotel.Name</h5>
+                        <p class="card-text text-muted">@hotel.Address</p>
+                        <p class="card-text">@hotel.Description</p>
+                        
+                        <hr/>
+                        <p class="small">
+                            Вільних номерів: <strong>@hotel.Rooms.Count</strong>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="#" class="btn btn-primary w-100">Переглянути номери</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

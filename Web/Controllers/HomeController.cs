@@ -27,4 +27,21 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        if (id == 0) return NotFound();
+
+        var hotel = await _context.Hotels
+            .Include(h => h.Rooms)
+            .FirstOrDefaultAsync(h => h.Id == id);
+
+        if (hotel == null)
+        {
+            return NotFound();
+        }
+
+        return View(hotel);
+    }
 }

@@ -1,0 +1,50 @@
+﻿@model Domain.Entities.Hotel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3">&larr; Назад до списку</a>
+
+    <div class="row">
+        <div class="col-md-5">
+            <img src="https://placehold.co/600x400/2980b9/ffffff?text=@Model.Name" class="img-fluid rounded shadow-sm mb-3" alt="@Model.Name">
+            <h2 class="text-primary">@Model.Name</h2>
+            <p class="text-muted"><i class="bi bi-geo-alt"></i> @Model.Address</p>
+            <p>@Model.Description</p>
+        </div>
+
+        <div class="col-md-7">
+            <h3>Доступні номери</h3>
+            <hr />
+
+            @if (Model.Rooms == null || !Model.Rooms.Any())
+            {
+                <div class="alert alert-warning">
+                    На жаль, у цьому готелі поки немає доступних номерів.
+                </div>
+            }
+            else
+            {
+                <div class="list-group">
+                    @foreach (var room in Model.Rooms)
+                    {
+                        <div class="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-2 border rounded">
+                            <div>
+                                <h5 class="mb-1">Номер @room.Name</h5>
+                                <p class="mb-1 text-muted">
+                                    <i class="bi bi-people-fill"></i> Місткість: @room.Capacity осіб
+                                </p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-success fw-bold">@room.PricePerNight ₴</h4>
+                                <a href="#" class="btn btn-primary btn-sm mt-1">Забронювати</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

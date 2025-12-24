@@ -46,7 +46,7 @@
                                 <span class="badge bg-success rounded-pill px-3 py-2">
                                     Вільних номерів: @hotel.Rooms.Count
                                 </span>
-                                <a href="#" class="btn btn-outline-primary btn-sm">Детальніше</a>
+                                <a asp-controller="Home" asp-action="Details" asp-route-id="@hotel.Id" class="btn btn-outline-primary btn-sm">Детальніше</a>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Domain.Entities.Hotel>
+
+@{
+    ViewData["Title"] = "Адмін-панель";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Керування готелями</h2>
+        <a asp-action="Statistics" class="btn btn-info text-white fw-bold me-2">Статистика</a>
+        <a asp-action="CreateHotel" class="btn btn-success fw-bold">+ Додати готель</a>
+    </div>
+
+    <table class="table table-bordered shadow-sm bg-white">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Адреса</th>
+                <th>Опис</th>
+                <th style="width: 150px;">Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hotel in Model)
+            {
+                <tr>
+                    <td>@hotel.Id</td>
+                    <td class="fw-bold text-primary">@hotel.Name</td>
+                    <td>@hotel.Address</td>
+                    <td class="small text-muted">@hotel.Description</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a asp-action="CreateRoom" asp-route-hotelId="@hotel.Id" class="btn btn-primary btn-sm" title="Додати номер">
+                                🛏️ +
+                            </a>
+
+                            <form asp-action="DeleteHotel" asp-route-id="@hotel.Id" method="post"
+                                  onsubmit="return confirm('Видалити цей готель?');" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">🗑️</button>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <form asp-action="DeleteHotel" asp-route-id="@hotel.Id" method="post"
+                              onsubmit="return confirm('Ви впевнені, що хочете видалити цей готель?');">
+                            <button type="submit" class="btn btn-danger btn-sm w-100">Видалити</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

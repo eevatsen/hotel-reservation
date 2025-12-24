@@ -1,0 +1,46 @@
+﻿@model Domain.Entities.Room
+
+@{
+    ViewData["Title"] = "Додати номер";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow p-4">
+            <h3 class="mb-3">🛏️ Додати номер</h3>
+
+            <form asp-action="CreateRoom" method="post">
+                <input type="hidden" asp-for="HotelId" value="@ViewData["HotelId"]" />
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-bold">Назва / Номер кімнати</label>
+                    <input asp-for="Name" class="form-control" placeholder="Наприклад: 101 або Lux" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Capacity" class="form-label fw-bold">Кількість місць</label>
+                    <input asp-for="Capacity" class="form-control" type="number" min="1" max="10" />
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PricePerNight" class="form-label fw-bold">Ціна за ніч (грн)</label>
+                    <input asp-for="PricePerNight" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="PricePerNight" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Зберегти номер</button>
+                    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

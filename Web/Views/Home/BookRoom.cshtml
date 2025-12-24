@@ -1,0 +1,50 @@
+﻿@model Web.Models.BookRoomViewModel
+
+@{
+    ViewData["Title"] = "Бронювання номера";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Бронювання: Номер @Model.RoomName</h3>
+            </div>
+            <div class="card-body">
+                <p class="lead">Ціна за ніч: <strong>@Model.PricePerNight ₴</strong></p>
+                <hr />
+
+                <form asp-action="BookRoom" method="post">
+                    <input type="hidden" asp-for="RoomId" />
+                    <input type="hidden" asp-for="RoomName" />
+                    <input type="hidden" asp-for="PricePerNight" />
+
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="CheckInDate" class="form-label"></label>
+                        <input asp-for="CheckInDate" class="form-control" />
+                        <span asp-validation-for="CheckInDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="CheckOutDate" class="form-label"></label>
+                        <input asp-for="CheckOutDate" class="form-control" />
+                        <span asp-validation-for="CheckOutDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Підтвердити бронювання</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Скасувати</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

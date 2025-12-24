@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Web.Models.MyBookingViewModel>
+
+@{
+    ViewData["Title"] = "Мої бронювання";
+}
+
+<div class="container mt-4">
+    <h2>🛎️ Мої бронювання</h2>
+    <hr />
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <h4>У вас поки немає бронювань 🤷‍♂️</h4>
+            <p>Час це виправити! Оберіть готель до смаку.</p>
+            <a asp-action="Index" class="btn btn-primary mt-3">Знайти готель</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover shadow-sm rounded overflow-hidden">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Готель</th>
+                        <th>Номер</th>
+                        <th>Заїзд</th>
+                        <th>Виїзд</th>
+                        <th>Ціна</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold text-primary">@item.HotelName</td>
+                            <td>@item.RoomName</td>
+                            <td>@item.CheckInDate.ToShortDateString()</td>
+                            <td>@item.CheckOutDate.ToShortDateString()</td>
+                            <td class="fw-bold">@item.TotalPrice ₴</td>
+                            <td>
+                                @if (item.CheckOutDate < DateTime.Today)
+                                {
+                                    <span class="badge bg-secondary">Завершено</span>
+                                }
+                                else if (item.CheckInDate <= DateTime.Today && item.CheckOutDate >= DateTime.Today)
+                                {
+                                    <span class="badge bg-success">Проживаєте</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary">Заплановано</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

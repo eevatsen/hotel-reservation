@@ -1,0 +1,46 @@
+﻿@model Web.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Вхід";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="auth-card">
+            <h2 class="auth-header">Вхід у систему</h2>
+
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label text-muted">Електронна пошта</label>
+                    <input asp-for="Email" class="form-control form-control-lg" placeholder="name@example.com" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label text-muted">Пароль</label>
+                    <input asp-for="Password" class="form-control form-control-lg" placeholder="•••••••" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input asp-for="RememberMe" class="form-check-input" />
+                    <label asp-for="RememberMe" class="form-check-label text-secondary"></label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 btn-lg shadow-sm">Увійти</button>
+            </form>
+
+            <div class="mt-4 text-center border-top pt-3">
+                <p class="text-muted">Ще не маєте акаунту?</p>
+                <a asp-action="Register" class="text-decoration-none fw-bold">Зареєструватися зараз</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

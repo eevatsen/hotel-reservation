@@ -5,41 +5,53 @@
     ViewData["Title"] = "Головна";
 }
 
-<div class="text-center mb-5">
-    <h1 class="display-4">Ласкаво просимо до Hotel Booking</h1>
-    <p>Знайдіть найкращий номер для свого відпочинку.</p>
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Знайдіть ідеальний готель</h1>
+        <p class="lead">Найкращі ціни, комфортні номери та незабутні враження.</p>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn btn-light btn-lg mt-3">Приєднатися до нас</a>
+        }
+    </div>
 </div>
 
-<div class="row">
-    @if (!Model.Any())
-    {
-        <div class="alert alert-warning">
-            Готелів поки немає в базі даних. Спробуйте перезапустити програму.
-        </div>
-    }
-    else
-    {
-        @foreach (var hotel in Model)
+<div class="container">
+    <div class="row">
+        @if (!Model.Any())
         {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://placehold.co/600x400?text=@hotel.Name" class="card-img-top" alt="@hotel.Name">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title">@hotel.Name</h5>
-                        <p class="card-text text-muted">@hotel.Address</p>
-                        <p class="card-text">@hotel.Description</p>
-                        
-                        <hr/>
-                        <p class="small">
-                            Вільних номерів: <strong>@hotel.Rooms.Count</strong>
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-top-0">
-                        <a href="#" class="btn btn-primary w-100">Переглянути номери</a>
-                    </div>
+            <div class="col-12 text-center">
+                <div class="alert alert-info py-5">
+                    <h4>Поки що готелів немає 😔</h4>
+                    <p>Адміністратор скоро додасть нові варіанти!</p>
                 </div>
             </div>
         }
-    }
+        else
+        {
+            @foreach (var hotel in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 hotel-card shadow-sm">
+                        <img src="https://placehold.co/600x400/2980b9/ffffff?text=@hotel.Name" class="card-img-top" alt="@hotel.Name">
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-primary fw-bold">@hotel.Name</h5>
+                            <p class="card-text text-muted mb-2"><i class="bi bi-geo-alt-fill"></i> @hotel.Address</p>
+                            <p class="card-text flex-grow-1">@hotel.Description</p>
+
+                            <hr class="my-3" />
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success rounded-pill px-3 py-2">
+                                    Вільних номерів: @hotel.Rooms.Count
+                                </span>
+                                <a href="#" class="btn btn-outline-primary btn-sm">Детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
 </div>

@@ -277,20 +277,6 @@ UpgradeLog*.htm
 ServiceFabricBackup/
 *.rptproj.bak
 
-# SQL Server files
-*.mdf
-*.ldf
-*.ndf
-
-# Business Intelligence projects
-*.rdl.data
-*.bim.layout
-*.bim_*.settings
-*.rptproj.rsuser
-*- [Bb]ackup.rdl
-*- [Bb]ackup ([0-9]).rdl
-*- [Bb]ackup ([0-9][0-9]).rdl
-
 # Microsoft Fakes
 FakesAssemblies/
 
@@ -324,9 +310,7 @@ node_modules/
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
-**/*.DesktopClient/ModelManifest.xml
 **/*.Server/GeneratedArtifacts
-**/*.Server/ModelManifest.xml
 _Pvt_Extensions
 
 # Paket dependency manager
@@ -398,21 +382,78 @@ FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
 
-# Local History for Visual Studio Code
-.history/
+# --- Additional common / project-specific ignores added below ---
 
-# Built Visual Studio Code Extensions
-*.vsix
+# JetBrains Rider / IntelliJ
+.idea/
+*.sln.iml
 
-# Windows Installer files from build outputs
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
+# macOS Finder files
+.DS_Store
+
+# Windows thumbnails and system files
+Thumbs.db
+desktop.ini
+
+# Local user secrets and environment overrides
+# Keep committed appsettings.json, but ignore machine-specific overrides:
+appsettings.*.json
+!appsettings.json
+
+# Common local overrides
+appsettings.Development.json
+appsettings.Local.json
+.env.*.local
+
+# ASP.NET publish / deployment output
+publish/
+publish/**
+
+# Azure Functions local settings (if any)
+local.settings.json
+
+# Temporary npm/yarn logs and package locks (if you don't want them)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Yarn v2+ cache folder
+.yarn/cache
+.yarn/unplugged
+.pnp.*
+
+# Lockfiles you may want to ignore (adjust to team preference)
+# package-lock.json
+# yarn.lock
+
+# Docker
+docker-compose.override.yml
+**/docker-compose.override.yml
+
+# Local tool manifest or package caches that are recreated
+.toolstarget
+.nuget/packages/
+# note: do not ignore .config/dotnet-tools.json if you rely on it; change if desired
+
+# VS Test results / temp files
+TestResults/
+
+# Temporary editor swap files
+*~.swp
+*.swo
+*.tmp
+
+# GitHub Actions / CI artifacts
+.github/workflows/*.local
+.github/*.local
+
+# Editor directories
+.vscode/
+.idea/
+
+# Ensure web libraries in wwwroot are tracked (do not ignore /wwwroot unless intentionally generated)
+# If you generate wwwroot on build (e.g. by a task), uncomment the following:
+# /wwwroot/
+
+# End of file
